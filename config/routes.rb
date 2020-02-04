@@ -4,6 +4,8 @@ Rails.application.routes.draw do
       resources :conversion_rates, only: %i[index create update show]
       resources :currencies, only: %i[index create update show]
       resources :denominations, only: %i[index create update show]
+      resources :orders, only: %i[index create show]
+      post 'orders/preview', to: 'orders#preview'
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
