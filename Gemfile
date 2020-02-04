@@ -28,6 +28,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # gem 'rack-cors'
 
 group :development, :test do
+  gem 'factory_bot_rails'
   # make rspec look nicer
   gem 'fuubar'
 
