@@ -74,6 +74,8 @@ GEM
     factory_bot_rails (5.1.1)
       factory_bot (~> 5.1.0)
       railties (>= 4.2.0)
+    faker (2.10.1)
+      i18n (>= 1.6, < 2)
     ffi (1.12.2)
     fuubar (2.5.0)
       rspec-core (~> 3.0)
@@ -190,6 +192,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   database_cleaner-active_record
   factory_bot_rails
+  faker
   fuubar
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)

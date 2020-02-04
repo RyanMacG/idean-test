@@ -30,6 +30,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 group :development, :test do
   gem 'database_cleaner-active_record'
   gem 'factory_bot_rails'
+  gem 'faker'
   # make rspec look nicer
   gem 'fuubar'
 
