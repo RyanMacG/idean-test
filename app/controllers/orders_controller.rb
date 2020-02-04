@@ -14,10 +14,9 @@ class OrdersController < ApplicationController
     end
   end
 
-  def show
-  end
-
   def preview
+    order_details = Order.conversion_details(order_params, is_preview: true)
+    render json: { order_preview: order_details }
   end
 
   private

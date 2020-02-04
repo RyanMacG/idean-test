@@ -5,17 +5,22 @@ class Order < ApplicationRecord
   validates_numericality_of :amount_purchased, :conversion_rate
   validates_presence_of :denominations
 
-  def self.conversion_details(order_params, is_preview? = false)
+  def self.conversion_details(order_params, is_preview: false)
     conversion_rate = retrieve_conversion_rate(order_params)
-    value, denominations = calculate_conversion(conversion_rate, order_params)
+    value, denominations = calculate_conversion(conversion_rate, order_params, is_preview)
 
-    {
-      amount_purchased: value,
+    base_details = {
       from_currency_id: conversion_rate.from_currency_id,
       to_currency_id: conversion_rate.to_currency_id,
       conversion_rate: conversion_rate.rate,
       denominations: denominations
     }
+
+    if is_preview
+      base_details.merge(amount_available: value)
+    else
+      base_details.merge(amount_purchased: value)
+    end
   end
 
   private
@@ -27,7 +32,7 @@ class Order < ApplicationRecord
     )
   end
 
-  def self.calculate_conversion(conversion_rate, order_params)
+  def self.calculate_conversion(conversion_rate, order_params, is_preview)
     amount_desired = order_params[:desired_amount].to_i
     denominations = Denomination.where(currency: conversion_rate.to_currency).where.not(stock: 0)
     total_available = denominations.sum(&:total_available)
@@ -37,7 +42,7 @@ class Order < ApplicationRecord
       value = amount_desired
       denominations.map do |d|
         denomination_stock_used << { value: d.amount, amount: d.stock }
-        d.update_attribute(:stock, 0) unless is_preview?
+        d.update_attribute(:stock, 0) unless is_preview
       end
     else
       # couldn't work out the more complicated scenario in the allotted time
