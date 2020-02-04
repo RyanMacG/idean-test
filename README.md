@@ -1,24 +1,19 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Installation
 
-Things you may want to cover:
+run:
+```sh
+$ bundle install
+$ rails db:setup
+$ bundle exec rspec
+$ rails s
+```
 
-* Ruby version
+## Documentation
 
-* System dependencies
+Documentation is available via a postman collection at: https://documenter.getpostman.com/view/51183/SWTEdcXB
 
-* Configuration
+## TODO
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Ran out of time to implement a non straight conversion within the 2 hours, I'd also really like to refactor a lot of the conversion logic into it's own lib and properly test that rather than relying on the request specs to cover it.
